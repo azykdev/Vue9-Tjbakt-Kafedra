@@ -1,6 +1,6 @@
 <template>
-  <div>
-
+  <div class="p-2">
+    News
   </div>
 </template>
 

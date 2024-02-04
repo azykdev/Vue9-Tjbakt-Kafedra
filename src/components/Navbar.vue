@@ -1,31 +1,27 @@
 <template>
-  <nav class="bg-white border-gray-200 dark:bg-gray-900 shadow ">
-    <div class=" max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2 h-full">
+  <nav class=" bg-slate-50 dark:bg-slate-900 shadow-md ">
+    <div class=" max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2 h-full">
 
-      <!-- Left --> 
+      <!-- Left -->
       <div class="flex items-center">
-        <!-- Navbar toggle -->
-        <button data-collapse-toggle="navbar-default" type="button"
-          class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
-          <span class="material-icons-sharp">
-            menu
-          </span>
-        </button>
 
         <!-- Logo -->
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse hidden md:block">
-          <img v-if="darkMode" src="@/assets/images/tjbakt-kafedra-logo-zip-file/png/logo-no-background.png" width="120px" alt="Logo" />
+          <img v-if="darkMode" src="@/assets/images/tjbakt-kafedra-logo-zip-file/png/logo-no-background.png" width="120px"
+            alt="Logo" />
           <img v-else src="@/assets/images/tjbakt-kafedra-logo-zip-file/png/logo.png" width="120px" alt="Logo" />
         </a>
+
       </div>
 
-      
-      
+
+
 
       <!-- Right -->
       <div class="flex items-center">
         <!-- Search -->
-        <button type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 flex items-center">
+        <button type="button"
+          class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 flex items-center">
           <span class="material-icons-sharp">
             search
           </span>

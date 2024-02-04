@@ -20,10 +20,25 @@ const router = createRouter({
       component: () => import("../layouts/admin.vue"),
       children: [
         {
-          name: "admin",
-          path: "admin",
-          component: () => import("../views/AdminView.vue"),
+          name: "dashboard",
+          path: "dashboard",
+          component: () => import("../views/DashboardView.vue"),
         },
+        {
+          name: 'teachers',
+          path: 'teachers',
+          component: () => import('../views/TeachersView.vue')
+        },
+        {
+          name: 'scienses',
+          path: 'scienses',
+          component: () => import('../views/SciensesView.vue')
+        },
+        {
+          name: 'news',
+          path: 'news',
+          component: () => import('../views/NewsView.vue')
+        }
       ],
     }
   ],

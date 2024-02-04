@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <AdminLayout>
     <RouterView />
-  </div>
+  </AdminLayout>
 </template>
 
 <script>
+import AdminLayout from './components/AdminLayout.vue';
   export default {
-    
+    components: { AdminLayout }
   }
 </script>
 
