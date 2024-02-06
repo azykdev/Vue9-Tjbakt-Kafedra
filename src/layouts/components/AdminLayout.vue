@@ -18,17 +18,41 @@
         <v-divider></v-divider>
 
         <v-list density="compact" nav>
-          <v-list-item prepend-icon="mdi-home" title="Dashboard" value="dashboard" @click="$router.push({ name: 'dashboard' })"></v-list-item>
-          <v-list-item prepend-icon="mdi-account-multiple" title="O'qituvchilar" value="teachers" @click="$router.push({ name: 'teachers' })"></v-list-item>
-          <v-list-item prepend-icon="mdi-book" title="Fanlar" value="sciences" @click="$router.push({ name: 'scienses' })"></v-list-item>
-          <v-list-item prepend-icon="mdi-newspaper" title="Yangiliklar" value="news" @click="$router.push({ name: 'news' })"></v-list-item>
+          <v-list-item  title="Dashboard" value="dashboard" @click="$router.push({ name: 'dashboard' })">
+            <template v-slot:prepend>
+              <v-icon class="dark:text-orange-600">
+                mdi-view-dashboard
+              </v-icon> 
+            </template>
+          </v-list-item>
+          <v-list-item title="O'qituvchilar" value="teachers" @click="$router.push({ name: 'teachers' })">
+            <template v-slot:prepend>
+              <v-icon class="dark:text-orange-600">
+                mdi-account
+              </v-icon>
+            </template>
+          </v-list-item>
+          <v-list-item  title="Fanlar" value="sciences" @click="$router.push({ name: 'scienses' })">
+            <template v-slot:prepend>
+              <v-icon class="dark:text-orange-600">
+                mdi-book
+              </v-icon>
+            </template>
+          </v-list-item>
+          <v-list-item title="Yangiliklar" value="news" @click="$router.push({ name: 'news' })">
+            <template v-slot:prepend>
+              <v-icon class="dark:text-orange-600">
+                mdi-newspaper
+              </v-icon>
+            </template>
+          </v-list-item>
         </v-list>
       </v-navigation-drawer>
 
-      <v-main class="h-screen">
+      <v-main class="h-screen ">
         <Navbar />
 
-        <div class=" bg-gray-100 dark:bg-gray-800 h-screen pt-[10vh]">
+        <div class="h-screen overflow-y-auto bg-gray-100 dark:bg-gray-800  pt-[10vh]">
           <slot />
         </div>
 

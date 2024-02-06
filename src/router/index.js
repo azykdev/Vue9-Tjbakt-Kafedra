@@ -25,22 +25,22 @@ const router = createRouter({
           component: () => import("../views/DashboardView.vue"),
         },
         {
-          name: 'teachers',
-          path: 'teachers',
-          component: () => import('../views/TeachersView.vue')
+          name: "teachers",
+          path: "teachers",
+          component: () => import("../views/TeachersView.vue"),
         },
         {
-          name: 'scienses',
-          path: 'scienses',
-          component: () => import('../views/SciensesView.vue')
+          name: "scienses",
+          path: "scienses",
+          component: () => import("../views/SciencesView.vue"),
         },
         {
-          name: 'news',
-          path: 'news',
-          component: () => import('../views/NewsView.vue')
-        }
+          name: "news",
+          path: "news",
+          component: () => import("../views/NewsView.vue"),
+        },
       ],
-    }
+    },
   ],
 });
 
