@@ -2,16 +2,12 @@ import TeachersService from "../service/teachers.js";
 
 const state = {
   teachers: [],
-  teacher: {},
 };
 
 const mutations = {
   getTeachersSuccess(state, teachers) {
     state.teachers = teachers;
-  },
-  getOneTeacherSuccess(state, teacher) {
-    state.teacher = teacher;
-  },
+  }
 };
 
 const actions = {
@@ -23,14 +19,6 @@ const actions = {
       });
     });
   },
-
-  // getOneTeacher(context, id) {
-  //   return new Promise(() => {
-  //     TeachersService.getOneTeacher(id).then((res) => {
-  //       context.commit("getOneTeacherSuccess", res.data);
-  //     });
-  //   });
-  // },
 
   // POST
   postTeacher(context, teacher) {

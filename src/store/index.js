@@ -1,12 +1,12 @@
 import { createStore } from 'vuex'
-import admin from '@/modules/admin'
 import teachers from '@/modules/teachers'
+import sciences from '@/modules/sciences'
 
 const store = createStore({
   state: {},
   mutations: {},
   actions: {},
-  modules: {admin, teachers},
+  modules: {teachers, sciences},
 })
 
 export default store

@@ -113,7 +113,7 @@ export default {
   }),
   computed: {
     sciences() {
-      return this.$store.state.admin.sciences
+      return this.$store.state.sciences.sciences
     },
     formTitle() {
       return this.editedIndex === -1 ? 'Yangi o\'qituvchi' : 'Tahrirlash'
@@ -127,6 +127,9 @@ export default {
       val || this.closeDelete()
     },
   },
+  mounted() {
+    this.$store.dispatch('getSciences')
+  },
   methods: {
     editItem(item) {
       this.editedIndex = this.sciences.indexOf(item)
@@ -139,7 +142,9 @@ export default {
       this.dialogDelete = true
     },
     deleteItemConfirm() {
-      this.sciences.splice(this.editedIndex, 1)
+      this.$store.dispatch('deleteScience', this.editedItem).then(() => {
+        this.$store.dispatch('getSciences')
+      })
       this.closeDelete()
     },
     close() {
@@ -158,9 +163,13 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.sciences[this.editedIndex], this.editedItem)
+        this.$store.dispatch('putScience', this.editedItem).then(() => {
+          this.$store.dispatch('getSciences')
+        })
       } else {
-        this.sciences.push(this.editedItem)
+        this.$store.dispatch('postScience', this.editedItem).then(() => {
+          this.$store.dispatch('getSciences')
+        })        
       }
       this.close()
     }
