@@ -42,7 +42,6 @@ const actions = {
   // DELETE
   deleteScience(context, sciences) {
     SciencesService.deleteScience(sciences).then((res) => {
-      // console.log(res);
     });
   },
 };

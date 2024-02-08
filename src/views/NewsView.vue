@@ -127,7 +127,7 @@ export default {
   },
   computed: {
     news() {
-      return this.$store.state.admin.news
+      return this.$store.state.news.news
     },
     formTitle() {
       return this.editedIndex === -1 ? 'Yangilik qo\'shish' : 'Tahrirlash'
@@ -140,6 +140,9 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete()
     },
+  },
+  mounted() {
+    this.$store.dispatch('getNews')
   },
   methods: {
     changeFile(file) {
@@ -174,7 +177,9 @@ export default {
     },
 
     deleteItemConfirm() {
-      this.news.splice(this.editedIndex, 1)
+      this.$store.dispatch('deleteNews', this.editedItem).then(() => {
+        this.$store.dispatch('getNews')
+      })
       this.closeDelete()
     },
 
@@ -194,9 +199,13 @@ export default {
     },
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.news[this.editedIndex], this.editedItem)
+        this.$store.dispatch('putNews', this.editedItem).then(() => {
+          this.$store.dispatch('getNews')
+        })
       } else {
-        this.news.push(this.editedItem)
+        this.$store.dispatch('postNews', this.editedItem).then(() => {
+          this.$store.dispatch('getNews')
+        })
       }
       this.close()
     }
