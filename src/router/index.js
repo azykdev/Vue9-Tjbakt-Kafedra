@@ -41,6 +41,17 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/",
+      component: () => import("../layouts/landing.vue"),
+      children: [
+        {
+          name: "landing",
+          path: "landing",
+          component: () => import("../views/LandingView.vue"),
+        },
+      ],
+    }
   ],
 });
 

@@ -135,7 +135,7 @@ export default {
       return this.editedIndex === -1 ? 'Yangi o\'qituvchi' : 'Tahrirlash'
     },
     teachers() {
-      return this.$store.state.admin.teachers
+      return this.$store.state.teachers.teachers
     }
   },
 
@@ -146,6 +146,10 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete()
     },
+  },
+
+  mounted() {
+    this.$store.dispatch('getTeachers')
   },
 
   methods: {
@@ -162,7 +166,10 @@ export default {
     },
 
     deleteItemConfirm() {
-      this.teachers.splice(this.editedIndex, 1)
+      // this.teachers.splice(this.editedIndex, 1)
+      this.$store.dispatch('deleteTeacher', this.editedItem).then(() => {
+        this.$store.dispatch('getTeachers')
+      })
       this.closeDelete()
     },
 
@@ -184,9 +191,15 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.teachers[this.editedIndex], this.editedItem)
+        // Object.assign(this.teachers[this.editedIndex], this.editedItem)
+        this.$store.dispatch('putTeacher', this.editedItem).then(() => {
+          this.$store.dispatch('getTeachers')
+        })
       } else {
-        this.teachers.push(this.editedItem)
+        this.$store.dispatch('postTeacher', this.editedItem).then(() => {
+          this.$store.dispatch('getTeachers')
+        })
+        
       }
       this.close()
     },
