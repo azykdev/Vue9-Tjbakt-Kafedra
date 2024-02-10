@@ -19,11 +19,18 @@
             <v-card-text>
               <v-container>
 
-                <form class="max-w-md mx-auto">
+                <form class="max-w-md mx-auto" @submit.prevent @keypress.enter="save">
                   <!-- FIO -->
                   <div class="mb-4">
-                    <label for="fio" class="block text-sm font-medium text-gray-600">Ism</label>
+                    <label for="fio" class="block text-sm font-medium text-gray-600">FIO</label>
                     <input v-model="editedItem.fio" type="text" id="fio" name="fio"
+                      class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-red-400 dark:bg-slate-700 dark:text-slate-100">
+                  </div>
+
+                  <!-- Level -->
+                  <div class="mb-4">
+                    <label for="level" class="block text-sm font-medium text-gray-600">Daraja</label>
+                    <input v-model="editedItem.level" type="text" id="level" name="level"
                       class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-red-400 dark:bg-slate-700 dark:text-slate-100">
                   </div>
 
@@ -35,13 +42,6 @@
                         class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-red-400 dark:bg-slate-700 dark:text-slate-100 file:px-2 file:bg-slate-600 file:text-slate-100 file:rounded-md file:outline-none file:border-none file:hover:bg-slate-800">
                       <VAvatar rounded="rounded-full" size="60" class="ms-6 " :image="editedItem.image"></VAvatar>
                     </div>
-                  </div>
-
-                  <!-- Age -->
-                  <div class="mb-4">
-                    <label for="age" class="block text-sm font-medium text-gray-600">Yosh</label>
-                    <input v-model="editedItem.age" type="number" min="0" id="age" name="age"
-                      class="mt-1 p-2 w-1/2 border rounded-md focus:outline-none focus:ring focus:border-red-400 dark:bg-slate-700 dark:text-slate-100">
                   </div>
 
                   <!-- Experience -->
@@ -111,21 +111,21 @@ export default {
     dialogDelete: false,
     headers: [
       { title: 'F.I.O', key: 'fio', sortable: false, },
-      { title: 'Yosh', key: 'age', sortable: false, },
+      { title: 'Daraja', key: 'level', sortable: false, },
       { title: 'Tajriba', key: 'experience', sortable: false, },
       { title: '', key: 'actions', sortable: false, },
     ],
     editedIndex: -1,
     editedItem: {
       fio: '',
+      level: '',
       image: '',
-      age: '',
-      experience: ''
+      experience: '',
     },
     defaultItem: {
       fio: '',
+      level: '',
       image: '',
-      age: '',
       experience: ''
     },
   }),
@@ -199,7 +199,7 @@ export default {
         this.$store.dispatch('postTeacher', this.editedItem).then(() => {
           this.$store.dispatch('getTeachers')
         })
-        
+
       }
       this.close()
     },

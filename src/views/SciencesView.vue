@@ -1,8 +1,15 @@
 <template>
   <div class="p-2 max-w-screen-lg mx-auto">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-center flex-wrap">
       <h1 class="my-5 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Fanlar
       </h1>
+
+      <div>
+        <p>Bakalavr fanlar: {{ bachelorSciencesCount }}ta, &nbsp; &nbsp; Magistratura fanlar: {{ sciences.length -
+          bachelorSciencesCount }}ta </p>
+        <p></p>
+      </div>
+
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ props }">
           <v-btn class="mb-2 " color="primary" variant="outlined" v-bind="props">
@@ -17,12 +24,22 @@
           <v-card-text>
             <v-container>
 
-              <form class="max-w-md mx-auto">
+              <form class="max-w-md mx-auto" @submit.prevent @keypress.enter="save">
                 <!-- Fan nomi -->
                 <div class="mb-4">
                   <label for="name" class="block text-sm font-medium text-gray-600">Fan nomi</label>
                   <input v-model="editedItem.name" type="text" id="name" name="name"
                     class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-red-400 dark:bg-slate-700 dark:text-slate-100">
+                </div>
+
+                <!-- Level -->
+                <div class="mb-4">
+                  <label for="level" class="block text-sm font-medium text-gray-600">Daraja</label>
+                  <select name="level" id="level" v-model="editedItem.level"
+                    class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-red-400 dark:bg-slate-700 dark:text-slate-100">
+                    <option value="Bakalavr" selected class="dark:bg-slate-700 dark:text-slate-100">Bakalavr</option>
+                    <option value="Magistr" class="dark:bg-slate-700 dark:text-slate-100">Magistr</option>
+                  </select>
                 </div>
 
                 <!-- Tavsifi -->
@@ -66,16 +83,19 @@
     <!-- Scienses Card -->
 
     <v-row>
-      <v-col cols="12" sm="6" v-for="science in sciences" :key="science">
+      <v-col cols="12" sm="6" md="4" v-for="science in sciences" :key="science">
         <v-card id="card" max-width="" elevation="20" class="dark:bg-slate-900 dark:text-slate-100 ">
           <!-- header bg image -->
-          <v-img :src="'https://source.unsplash.com/random/?Pattern&' + Math.ceil(Math.random() * 100)" height="200px"
+          <v-img :src="'https://source.unsplash.com/random/?Pattern&' + Math.ceil(Math.random() * 100)" height="100px"
             cover></v-img>
           <v-card-item>
-            <v-card-title>
-              {{ science.name }}
-            </v-card-title>
+            <p class=" text-md font-light">{{ science.name }}</p>
           </v-card-item>
+
+          <v-card-text>
+            <v-chip :color="science.level === 'Bakalavr' ? 'success' : 'primary'" size="small"> {{ science.level
+            }}</v-chip>
+          </v-card-text>
 
           <v-card-text>
             {{ science.description }}
@@ -97,6 +117,8 @@
 </template>
 
 <script>
+import sciences from '@/modules/sciences'
+
 export default {
   data: () => ({
     dialog: false,
@@ -104,10 +126,12 @@ export default {
     editedIndex: -1,
     editedItem: {
       name: '',
+      level: '',
       description: '',
     },
     defaultItem: {
       name: '',
+      level: '',
       description: '',
     },
   }),
@@ -118,6 +142,9 @@ export default {
     formTitle() {
       return this.editedIndex === -1 ? 'Yangi o\'qituvchi' : 'Tahrirlash'
     },
+    bachelorSciencesCount() {
+      return this.$store.state.sciences.sciences.filter(science => science.level === 'Bakalavr').length
+    }
   },
   watch: {
     dialog(val) {
@@ -169,7 +196,7 @@ export default {
       } else {
         this.$store.dispatch('postScience', this.editedItem).then(() => {
           this.$store.dispatch('getSciences')
-        })        
+        })
       }
       this.close()
     }

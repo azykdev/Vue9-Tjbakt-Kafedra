@@ -63,17 +63,21 @@ export default {
     },
 
     login(admin) {
-      let hasAdmin = false
-      this.admins.forEach((item) => {
-        if (item.username === admin.username && item.password === admin.password) {
-          hasAdmin = true
+      if (admin.username && admin.password) {
+        let hasAdmin = false
+        this.admins.forEach((item) => {
+          if (item.username === admin.username && item.password === admin.password) {
+            hasAdmin = true
+          }
+        })
+
+        if (hasAdmin) {
+          this.$router.push({ name: 'dashboard' })
+        } else {
+          alert("Foydalanuvchi nomi yoki parol noto'g'ri")
         }
-      })
-      
-      if (hasAdmin) {
-        this.$router.push({ name: 'dashboard' })
       } else {
-        alert("Foydalanuvchi nomi yoki parol noto'g'ri")
+        alert("Foydalanuvchi nomi yoki parol kiritilmadi")
       }
     }
   },
